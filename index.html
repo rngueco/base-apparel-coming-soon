@@ -11,15 +11,20 @@
 </head>
 <body>
   <header>
-    <img src="images/logo.svg" alt="Base Apparel">
+    <div class="wrapper">
+      <img src="images/logo.svg" alt="Base Apparel">
+    </div>
   </header>
   <main>
     <div class="card">
+      <div class="card__img"></div>
       <div class="card__body">
-        <h1 class="card__title">We're <span>coming soon</span></h1>
-        <p>Hello fellow shoppers! We're currently building our new fashion store. Add your email below to stay up-to-date with announcements and our launch deals.</p>
-        <form action="">
-          <input type="email" name="email" id="email" placeholder="Email Address">
+        <h1 class="card__title"><span>We're</span> coming soon</h1>
+        <p class="card__description">Hello fellow shoppers! We're currently building our new fashion store. Add your email below to stay up-to-date with announcements and our launch deals.</p>
+        <form action="" id="email-form">
+          <input type="email" name="email" id="email" placeholder="Email Address"><input type="submit" value="">
+          <span id="error-message"></span>
+          <span id="error-icon"></span>
         </form>
       </div>
 
@@ -32,4 +37,5 @@
     </p>
   </footer>
 </body>
+<script src="js/validate.js"></script>
 </html>
