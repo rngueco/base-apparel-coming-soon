@@ -8,8 +8,122 @@ $soft-red: hsl(0, 93%, 68%);
 $dark-grayish-red: hsl(0, 6%, 24%);
 
 body {
+    background: linear-gradient(135deg, hsl(0, 0%, 100%), hsl(0, 100%, 98%) 70%);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
     font: {
         size: 1em;
         family: 'Josefin Sans', sans-serif;
+    }
+}
+*, * *, *::after, *::before {
+    box-sizing: border-box;
+}
+
+header {
+    padding: 2em;
+
+    img {
+        vertical-align: bottom;
+        height: 1.5em;
+    }
+}
+
+main {
+    min-height: calc(100vh - 5.5em); // Viewport height minues header height
+    display: flex;
+    justify-content: start;
+    align-items: stretch;
+    flex: {
+        direction: column;
+        wrap: nowrap;
+    }
+}
+
+.card {
+    width: 100%;
+}
+
+.card__img {
+    background: {
+        image: url("../images/hero-mobile.jpg");
+        repeat: no-repeat;
+        size: cover;
+
+    }
+
+    width: 100%;
+    height: 250px;
+}
+
+.card__body {
+    padding: 2em;
+    text-align: center;
+}
+    .card__title {
+        font-size: 2.5em;
+        text-transform: uppercase;
+        color: $dark-grayish-red;
+        letter-spacing: 0.25em;
+        line-height: 1.1em;
+
+        span {
+            font-weight: 300;
+            color: $desaturated-red;
+        }
+    }
+    .card__description {
+        font: {
+            weight: 400;
+            size: 0.9em;
+        }
+
+        line-height: 1.5em;
+        color: $desaturated-red;
+        margin-bottom: 2em;
+    }
+    form {
+        white-space: nowrap;
+        height: 3em;
+        width: 100%;
+        margin-bottom: 2em;
+    }
+    input[type="email"] {
+        border: {
+            width: 1px;
+            style: solid;
+            color: $desaturated-red;
+            radius: 2em;
+        }
+
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        background: none;
+        padding: 1em 2em;
+        color: $desaturated-red;
+    }
+    input[type="submit"] {
+        display: inline-block;
+        height: 100%;
+        padding: 0 2.5em;
+        border: none;
+        border-radius: 2em;
+        transform: translateX(-100%);
+        background: url("../images/icon-arrow.svg"), linear-gradient(135deg, hsl(0, 80%, 86%), hsl(0, 74%, 74%));
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: $desaturated-red;
+    color: $dark-grayish-red;
+
+    a {
+        color: inherit;
     }
 }
