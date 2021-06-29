@@ -1,33 +1,47 @@
 const email_form = document.querySelector('#email-form');
-const email_pattern = new RegExp('/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/');
 const error_message = document.querySelector('#error-message');
+const email = document.querySelector('#email');
 
-email_form.addEventListener('submit', function (event) {
-    // Prevent submission of form
-    event.preventDefault();
-
-    // Get email element and error message element
-    var email = document.querySelector('#email');
-    var email_address = email.value;
-
-    // If empty, return an error message and set outline color to red.
-    if (email_address == "" || email_address == null) {
-        error_message.innerHTML = 'Please enter an email address.';
-        email.style.outlineColor = 'red';
-    }
-    // If invalid, return an error message and set outline color to red.
-    else if (email_pattern.test(email_address)) {
-        error_message.innerHTML = 'Please enter a valid email address.';
-        email.style.outlineColor = 'red';
-    }
-    // Else if no error then submit form.
-    else {
-        email_form.submit();
-    }
+// Add an input invalid listener to email input field. Return 
+// appropriate error message when input is invalid.
+email.addEventListener('invalid', function (event) {
+    returnErrorMessage(event);
 })
 
-// Remove previous error messages on input keyup.
-email_form.addEventListener('keyup', function (event) {
+// On blur, check for input validity. This calls the input invalid
+// event listener.
+email.addEventListener('blur', function (event) {
+    email.checkValidity();
+})
+
+// Remove previous error messages on input focus.
+email.addEventListener('focus', function (event) {
     error_message.innerHTML = "";
-    email.style.outlineColor = 'revert';
+    email.classList.remove('invalid', 'invalid-message', 'empty-message');
+})
+
+// Function to return appropriate error message based on type or error.
+function returnErrorMessage(event) {
+    var email_address = email.value;
+
+    if (email_address == "" || email_address == null) empty(event);
+    else invalid(event);
+}
+
+function invalid (event) {
+    email.classList.add('invalid', 'invalid-message');
+}
+
+function empty (event) {
+    email.classList.add('invalid', 'empty-message');
+}
+
+// In case user removes the `required` attribute on input element
+email_form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var email_address = email.value;
+
+    // Test if input field is empty, return appropriate error message.
+    if (email_address == "" || email_address == null) returnErrorMessage(event);
+    else email_form.submit();
 })

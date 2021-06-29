@@ -127,24 +127,33 @@ main {
             outline: 2px solid $dark-grayish-red;
         }
 
-        &:valid {
+        // If input is valid, then indicate with color change.
+        &:valid, &.valid {
             outline-color: green;
         }
-
-        &:invalid {
+        
+        // Only display any error message once the user starts writing.
+        &:not(:placeholder-shown):invalid, &.invalid {
             outline-color: $soft-red;
             border-color: $soft-red;
-        }
-        
-        &:invalid ~ #error-message::after {
-            display: block;
-            content: "Please provide a valid email.";
-            font-size: 0.85em;
-            color: $soft-red;
-        }
 
-        &:invalid ~ #error-icon::after {
-            content: url("../images/icon-error.svg");
+            & ~ #error-icon::after {
+                content: url("../images/icon-error.svg");
+            }
+            
+            &.invalid-message ~ #error-message::after {
+                display: block;
+                content: "Please provide a valid email.";
+                font-size: 0.85em;
+                color: $soft-red;
+            }
+
+            &.empty-message ~ #error-message::after {
+                display: block;
+                content: "Please enter an email address.";
+                font-size: 0.85em;
+                color: $soft-red;
+            }
         }
     }
     input[type="submit"] {

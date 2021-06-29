@@ -106,21 +106,27 @@ input[type=email] {
 input[type=email]:focus {
   outline: 2px solid #413a3a;
 }
-input[type=email]:valid {
+input[type=email]:valid, input[type=email].valid {
   outline-color: green;
 }
-input[type=email]:invalid {
+input[type=email]:not(:placeholder-shown):invalid, input[type=email].invalid {
   outline-color: #f96262;
   border-color: #f96262;
 }
-input[type=email]:invalid ~ #error-message::after {
+input[type=email]:not(:placeholder-shown):invalid ~ #error-icon::after, input[type=email].invalid ~ #error-icon::after {
+  content: url("../images/icon-error.svg");
+}
+input[type=email]:not(:placeholder-shown):invalid.invalid-message ~ #error-message::after, input[type=email].invalid.invalid-message ~ #error-message::after {
   display: block;
   content: "Please provide a valid email.";
   font-size: 0.85em;
   color: #f96262;
 }
-input[type=email]:invalid ~ #error-icon::after {
-  content: url("../images/icon-error.svg");
+input[type=email]:not(:placeholder-shown):invalid.empty-message ~ #error-message::after, input[type=email].invalid.empty-message ~ #error-message::after {
+  display: block;
+  content: "Please enter an email address.";
+  font-size: 0.85em;
+  color: #f96262;
 }
 
 input[type=submit] {
